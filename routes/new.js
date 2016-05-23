@@ -1,18 +1,22 @@
 // This route will save the given url into the database
 // returning its "shorter" version
 var router = require('express').Router();
+var validUrl = require('valid-url');
 
 router.get('/:url', function(req, res) {
     var json = {};
-    json.original = req.params.url;
-    json.shorter = getShortUrl(req, random());
+    if (!isValidURL(req.params.url)) {
+        json.err = 'invalid url';
+    } else {
+        json.original = req.params.url;
+        json.shorter = getShortUrl(req, random());
+    }
   res.send(json);
 });
 
 
-var isValidURL = function () {
-    // TODO
-    return false;
+var isValidURL = function (suspect) {
+    return validUrl.isUri('http://' + suspect);
 }
 
 var getShortUrl = function (req, id) {
