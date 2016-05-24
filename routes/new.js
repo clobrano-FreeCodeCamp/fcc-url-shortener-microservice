@@ -1,23 +1,21 @@
 // This route will save the given url into the database
 // returning its "shorter" version
 var router = require('express').Router();
-var validUrl = require('valid-url');
+var isValid = require('valid-url').isWebUri;
 
-router.get('/:url', function(req, res) {
+router.get('/http://:url', function(req, res) {
     var json = {};
-    if (!isValidURL(req.params.url)) {
-        json.err = 'invalid url';
-    } else {
-        json.original = req.params.url;
-        json.shorter = getShortUrl(req, random());
-    }
-  res.send(json);
+    json.original = 'http://' + req.params.url;
+    json.shorter = getShortUrl(req, random()); + req.originalUrl
+    res.send(json);
 });
 
-
-var isValidURL = function (suspect) {
-    return validUrl.isUri('http://' + suspect);
-}
+router.get('/https://:url', function(req, res) {
+    var json = {};
+    json.original = 'https://' + req.params.url;
+    json.shorter = getShortUrl(req, random()); + req.originalUrl
+    res.send(json);
+});
 
 var getShortUrl = function (req, id) {
     var baseUrl = req.protocol + '://' + req.get('host') + '/';
@@ -30,3 +28,4 @@ var random = function() {
 }
 
 module.exports = router;
+
