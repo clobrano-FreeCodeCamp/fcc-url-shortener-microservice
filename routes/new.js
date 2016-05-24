@@ -3,24 +3,19 @@
 var router = require('express').Router();
 var isValid = require('valid-url').isWebUri;
 
-router.get('/http://:url', function(req, res) {
+// Using GET parameters in place of something like "/:url", because
+// with this last solution the server is fooled by the "http" in the
+// middle of the whole url.
+router.get('/', function(req, res) {
     var json = {};
-    json.original = 'http://' + req.params.url;
-    json.shorter = getShortUrl(req, random()); + req.originalUrl
+    json.original = req.param('url');
+    if (!isValid(json.original)) {
+        json.err = 'invalid url';
+    } else {
+        json.shorter = getShortUrl(req, random()); + req.originalUrl
+    }
     res.send(json);
 });
-
-router.get('/https://:url', function(req, res) {
-    var json = {};
-    json.original = 'https://' + req.params.url;
-    json.shorter = getShortUrl(req, random()); + req.originalUrl
-    res.send(json);
-});
-
-var getShortUrl = function (req, id) {
-    var baseUrl = req.protocol + '://' + req.get('host') + '/';
-    return baseUrl + id;
-}
 
 var random = function() {
     // Let the IDs be numbers with up to 5 digits
