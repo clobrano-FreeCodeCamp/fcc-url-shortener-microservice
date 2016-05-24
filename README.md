@@ -47,3 +47,9 @@ Third user story:
 * find original url given the ID
 * redirect to the original url OR return error if no match was found
 
+
+## 2016-05-24
+I decided to use GET parameters for creating shorurl like /api/new?url=...
+This way I got rid of the two routes, one for https and another one for http, that
+were necessary using URL variable name (/api/new/:url) since the http/https in the
+middle of a whole URL fooled the controller and gave me "error malformed url".
