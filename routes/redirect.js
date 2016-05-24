@@ -1,11 +1,16 @@
 var express = require('express');
+var loadUrl = require('../database').load
 var router = express.Router();
 
-/* GET users listing. */
 router.get('/:id', function(req, res) {
-    res.writeHead(301,
-                  {Location: 'http://www.google.it'});
-    res.end();
+    loadUrl(req.params.id, function(data) {
+        if (data) {
+            res.writeHead(301, {Location: data.original});
+            res.end();
+        } else {
+            res.send('Could not find short url for ID: ' + req.params.id);
+        }
+    });
 });
 
 module.exports = router;
