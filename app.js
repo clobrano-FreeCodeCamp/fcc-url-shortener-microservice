@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var newUrl = require('./routes/new');
+var addNew = require('./routes/new');
 var redirect = require('./routes/redirect');
 
 var app = express();
@@ -23,13 +23,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/api/new', newUrl);
 app.use('/api/go', redirect);
-app.use(function(req, res){
-    var json = {};
-    json.err = 'invalid url';
-    res.send(json);
-});
+app.use('/api/new', addNew);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
