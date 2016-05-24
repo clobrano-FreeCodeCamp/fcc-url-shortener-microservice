@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
     } else {
         // Let the IDs be numbers with up to 5 digits
         id = Math.ceil(Math.random() * 100000);
-        json.littleurl = req.protocol + '://' + req.get('host') + '/' + id
+        json.littleurl = req.protocol + '://' + req.get('host') + '/api/go/' + id
         save(id, json.original);
     }
 
