@@ -2,7 +2,7 @@
 // returning its "shorter" version
 var router = require('express').Router();
 var isValid = require('valid-url').isWebUri;
-var save = require('../database').save;
+var save = require('../lib/database').save;
 
 // Using GET parameters in place of something like "/:url", because
 // with this last solution the server is fooled by the "http" in the

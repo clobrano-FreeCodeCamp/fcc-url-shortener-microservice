@@ -1,5 +1,5 @@
 var express = require('express');
-var loadUrl = require('../database').load
+var loadUrl = require('../lib/database').load
 var router = express.Router();
 
 router.get('/:id', function(req, res) {
