@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Short Url' });
+  res.render('index', { title: 'URL shortner APP' });
 });
 
 module.exports = router;

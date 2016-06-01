@@ -2,6 +2,20 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
-  p #{title} is a url shortener in nodejs.
-  p To get a new short url add 'api/new?url=[your URL]' to the address bar above. You will get the replacement link"
+  p Welcome to #{title} a full stack JavaScript URL shortener.
+  p 
+    |The specs of this microservice come from 
+    a(href='https://www.freecodecamp.com/challenges/url-shortener-microservice') FreeCode Camp challenge
+    |:
+  ul
+    li User Story: I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.
+    li User Story: If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.
+    li User Story: When I visit that shortened URL, it will redirect me to my original link.
+
+  p 
+    |To get a new short url add 'api/new?url=[your URL]' to the address bar above, like in this 
+    a(href='api/new?url=https://www.google.com') example
+    |. You will get a URL replacement
+
+  p The source code of this service can be found on my 
+    a(href='https://github.com/clobrano/fcc-url-shortener-microservice') GitHub account
